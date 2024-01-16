@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../fonts/PublicSans-Regular.eot');
+    src: url('../../fonts/PublicSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/PublicSans-Regular.woff2') format('woff2'),
+        url('../../fonts/PublicSans-Regular.woff') format('woff'),
+        url('../../fonts/PublicSans-Regular.ttf') format('truetype'),
+        url('../../fonts/PublicSans-Regular.svg#PublicSans-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../fonts/PublicSans-Medium.eot');
+    src: url('../../fonts/PublicSans-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/PublicSans-Medium.woff2') format('woff2'),
+        url('../../fonts/PublicSans-Medium.woff') format('woff'),
+        url('../../fonts/PublicSans-Medium.ttf') format('truetype'),
+        url('../../fonts/PublicSans-Medium.svg#PublicSans-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../../fonts/PublicSans-Bold.eot');
+    src: url('../../fonts/PublicSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/PublicSans-Bold.woff2') format('woff2'),
+        url('../../fonts/PublicSans-Bold.woff') format('woff'),
+        url('../../fonts/PublicSans-Bold.ttf') format('truetype'),
+        url('../../fonts/PublicSans-Bold.svg#PublicSans-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Red Hat Display';
+    src: url('../../fonts/RedHatDisplay-Bold.eot');
+    src: url('../../fonts/RedHatDisplay-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/RedHatDisplay-Bold.woff2') format('woff2'),
+        url('../../fonts/RedHatDisplay-Bold.woff') format('woff'),
+        url('../../fonts/RedHatDisplay-Bold.ttf') format('truetype'),
+        url('../../fonts/RedHatDisplay-Bold.svg#RedHatDisplay-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
