@@ -9,10 +9,10 @@ $xxl: 1366px;
 // Container max-width.
 $container-md: 760px;
 $container-lg: 990px;
-$container-xl: 1200px;
+$container-xl: 1240px;
 
 // Container padding.
-$container-padding: 24px;
+$container-padding: 20px;
 
 // Font families.
 $ff			: 'Public Sans', sans-serif;
@@ -39,6 +39,14 @@ $lh-title	: 1.3;
 // Colors.
 $white	: #FFFFFF;
 $black	: #000000;
+$dark   : #212055;
+ 
+//bg's
+$dark-bg: rgba(255, 255, 255, 0.10);
 
 // Others.
 $tr: 0.35s;
+$op: 0.7;
+$blur: blur(12px);
+$bord100: 100px;
+$bord15: 15px;

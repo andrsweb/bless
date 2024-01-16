@@ -21,4 +21,42 @@
 
 <body>
 	<div class="wrapper">
-		<header class="header"></header>
+		<header class="header">
+			<div class="container">
+				<div class="header__wrapper">
+					<a href="/" class="header__logo">
+						@@include('../svg/logo/logo.html')
+					</a>
+					<nav class="header__nav">
+						<ul class="menu">
+							<li class="menu-item active">
+								<a href="#">
+									Home
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">
+									Different
+								</a>
+							</li>
+							<li class="menu-item">
+								<a href="#">
+									NFT’s
+								</a>
+							</li>
+							<li class="menu-item social__links">
+								<a href="#" class="social__link" target="_blank">
+									@@include('../svg/social/discord.html')
+								</a>
+								<a href="#" class="social__link" target="_blank">
+									@@include('../svg/social/x.html')
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<button class="button dark">
+						Apply for whitelist
+					</button>
+				</div>
+			</div>
+		</header>
