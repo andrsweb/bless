@@ -1,4 +1,5 @@
 import Swiper from "swiper"
+import {EffectFade} from 'swiper/modules'
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
@@ -29,7 +30,7 @@ const sectionsScroll = (selector) => {
             },
         },
 
-        speed: 3000,
+        speed: 1000,
     })
 
     horizontalSlider = new Swiper('.slots-swiper', {
@@ -56,22 +57,78 @@ const sectionsScroll = (selector) => {
                     const lastSlideElement = horizontalSlider.slides[lastSlide]
                     lastSlideElement.classList.add('animated')
 
-                    // Разрешаем вертикальный свайп и запрещаем горизонтальный
-                    verticalSwiper.allowSlidePrev = true
+                    verticalSwiper.allowSlidePrev = false
                     verticalSwiper.allowSlideNext = true
 
                     horizontalSlider.allowSlidePrev = false
                     horizontalSlider.allowSlideNext = false
 
-                    // Переключаем вертикальный слайдер на следующий слайд
                     setTimeout(() => {
                         verticalSwiper.slideNext()
-                    }, 3000)
+                        
+                        const nextHorizontalSlideIndex = 0
+                        horizontalNftSlider.slideTo(nextHorizontalSlideIndex)
+    
+                        verticalSwiper.allowSlidePrev = true
+                        verticalSwiper.allowSlideNext = false
+                    }, 1000)
                 }
             },
         },
 
-        speed: 3000,
+        speed: 1000,
+    })
+
+    const horizontalNftSlider = new Swiper('.nft-swiper', {
+        parent: selector,
+        direction: 'horizontal',
+        slidesPerView: 1,
+        mousewheel: false,
+        keyboard: {
+            enabled: true,
+        },
+        allowTouchMove: false,
+
+        modules: [EffectFade],
+
+        effect: "fade",
+
+        on: {
+            slideChangeTransitionStart: function () {
+                isAnimating = true
+            },
+            slideChangeTransitionEnd: function () {
+                isAnimating = false
+
+                const lastSlide = horizontalNftSlider.slides.length - 1
+                const isLastSlide = horizontalNftSlider.activeIndex === lastSlide
+
+                if (isLastSlide) {
+                    const lastSlideElement = horizontalNftSlider.slides[lastSlide]
+                    lastSlideElement.classList.add('animated')
+
+                    verticalSwiper.allowSlidePrev = false
+                    verticalSwiper.allowSlideNext = true
+
+                    horizontalSlider.allowSlidePrev = false
+                    horizontalSlider.allowSlideNext = false
+
+                    setTimeout(() => {
+                        if (horizontalSlider.activeIndex !== lastSlide) {
+                            verticalSwiper.slideNext()
+                        } else {
+                            verticalSwiper.allowSlidePrev = true
+                            verticalSwiper.allowSlideNext = false
+
+                            horizontalSlider.allowSlidePrev = true
+                            horizontalSlider.allowSlideNext = true
+                        }
+                    }, 1000)
+                }
+            },
+        },
+
+        speed: 1000,
     })
 
     verticalSwiper.on('slideChange', () => {
@@ -90,6 +147,9 @@ const sectionsScroll = (selector) => {
 
             horizontalSlider.allowSlidePrev = false
             horizontalSlider.allowSlideNext = true
+
+            horizontalNftSlider.allowSlidePrev = false
+            horizontalNftSlider.allowSlideNext = true
         }
     })
 
@@ -108,8 +168,10 @@ const sectionsScroll = (selector) => {
             }
         } else {
             if (delta > 0) {
+                horizontalNftSlider.slideNext()
                 verticalSwiper.slideNext()
             } else if (delta < 0) {
+                horizontalNftSlider.slidePrev()
                 verticalSwiper.slidePrev()
             }
         }
