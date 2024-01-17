@@ -32,6 +32,20 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
+
+            &.animated {
+                animation: scaled 3s forwards ease $tr;
+
+                @keyframes scaled {
+                    0% {
+                        scale: 1;
+                    }
+
+                    100% {
+                        scale: 2;
+                    }
+                }
+            }
         }
     }
 }

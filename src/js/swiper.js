@@ -18,7 +18,6 @@ const sectionsScroll = (selector) => {
             enabled: true,
         },
         allowTouchMove: false,
-        nested: true,
 
         on: {
             slideChangeTransitionStart: function () {
@@ -41,7 +40,6 @@ const sectionsScroll = (selector) => {
             enabled: true,
         },
         allowTouchMove: false,
-        nested: true,
 
         on: {
             slideChangeTransitionStart: function () {
@@ -49,6 +47,16 @@ const sectionsScroll = (selector) => {
             },
             slideChangeTransitionEnd: function () {
                 isAnimating = false;
+
+                // Проверяем, достигнут ли последний слайд
+                const lastSlide = horizontalSlider.slides.length - 1;
+                const isLastSlide = horizontalSlider.activeIndex === lastSlide;
+
+                if (isLastSlide) {
+                    // Добавляем класс "animated" к последнему слайду
+                    const lastSlideElement = horizontalSlider.slides[lastSlide];
+                    lastSlideElement.classList.add('animated');
+                }
             },
         },
 
@@ -71,11 +79,10 @@ const sectionsScroll = (selector) => {
             verticalSwiper.allowSlideNext = false;
 
             // Разрешаем скролл для горизонтального слайдера
-            horizontalSlider.allowTouchMove = true;
-            horizontalSlider.allowSlidePrev = true;
+            horizontalSlider.allowSlidePrev = false;
             horizontalSlider.allowSlideNext = true;
         } else {
-            verticalSwiper.allowSlidePrev = true;
+            verticalSwiper.allowSlidePrev = false;
             verticalSwiper.allowSlideNext = true;
 
             // Запрещаем скролл для горизонтального слайдера
@@ -107,5 +114,31 @@ const sectionsScroll = (selector) => {
         }
     });
 
-    // ... (остальной код)
+    let touchStartY;
+
+    document.addEventListener('touchstart', (event) => {
+        if (isAnimating) {
+            return;
+        }
+
+        touchStartY = event.touches[0].clientY;
+    });
+
+    document.addEventListener('touchend', (event) => {
+        const swipers = document.querySelectorAll('.swiper');
+        if (isAnimating) {
+            return;
+        }
+
+        const touchEndY = event.changedTouches[0].clientY;
+        const deltaY = touchEndY - touchStartY;
+
+        swipers.forEach(swiper => {
+            if (deltaY > 50) {
+                swiper.slidePrev();
+            } else if (deltaY < -50) {
+                swiper.slideNext();
+            }
+        });
+    });
 };
