@@ -19,6 +19,7 @@ const sectionsScroll = (selector) => {
             enabled: true,
         },
         allowTouchMove: false,
+        speed: 2000,
 
         on: {
             slideChangeTransitionStart: () => {
@@ -29,7 +30,7 @@ const sectionsScroll = (selector) => {
             },
         },
 
-        speed: 1000,
+        speed: 2000,
     })
 
     const handleScroll = (delta, currentSlider, nextSlider) => {
@@ -76,7 +77,7 @@ const sectionsScroll = (selector) => {
 
                             verticalSwiper.allowSlidePrev = false
                             verticalSwiper.allowSlideNext = false
-                        }, 1000)
+                        }, 2000)
                     }
                 },
             },
@@ -93,6 +94,7 @@ const sectionsScroll = (selector) => {
             enabled: true,
         },
         allowTouchMove: false,
+        speed: 2000
     })
 
     const horizontalNftSlider = setupSlider('.nft-swiper', {
@@ -103,6 +105,7 @@ const sectionsScroll = (selector) => {
             enabled: true,
         },
         allowTouchMove: false,
+        speed: 2000,
 
         modules: [EffectFade],
         effect: "fade",
