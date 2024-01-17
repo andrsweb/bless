@@ -1,15 +1,16 @@
-import Swiper from "swiper";
+import Swiper from "swiper"
 
 document.addEventListener('DOMContentLoaded', () => {
-    'use strict';
+    'use strict'
 
-    sectionsScroll('.sections-scroll');
-});
+    sectionsScroll('.sections-scroll')
+})
 
 const sectionsScroll = (selector) => {
-    let isAnimating = false;
+    let isAnimating = false
+    let horizontalSlider
 
-    if (!selector) return;
+    if (!selector) return
 
     const verticalSwiper = new Swiper(selector, {
         direction: 'vertical',
@@ -21,17 +22,17 @@ const sectionsScroll = (selector) => {
 
         on: {
             slideChangeTransitionStart: function () {
-                isAnimating = true;
+                isAnimating = true
             },
             slideChangeTransitionEnd: function () {
-                isAnimating = false;
+                isAnimating = false
             },
         },
 
         speed: 3000,
-    });
+    })
 
-    const horizontalSlider = new Swiper('.slots-swiper', {
+    horizontalSlider = new Swiper('.slots-swiper', {
         parent: selector,
         direction: 'horizontal',
         slidesPerView: 1,
@@ -43,102 +44,102 @@ const sectionsScroll = (selector) => {
 
         on: {
             slideChangeTransitionStart: function () {
-                isAnimating = true;
+                isAnimating = true
             },
             slideChangeTransitionEnd: function () {
-                isAnimating = false;
+                isAnimating = false
 
-                // Проверяем, достигнут ли последний слайд
-                const lastSlide = horizontalSlider.slides.length - 1;
-                const isLastSlide = horizontalSlider.activeIndex === lastSlide;
+                const lastSlide = horizontalSlider.slides.length - 1
+                const isLastSlide = horizontalSlider.activeIndex === lastSlide
 
                 if (isLastSlide) {
-                    // Добавляем класс "animated" к последнему слайду
-                    const lastSlideElement = horizontalSlider.slides[lastSlide];
-                    lastSlideElement.classList.add('animated');
+                    const lastSlideElement = horizontalSlider.slides[lastSlide]
+                    lastSlideElement.classList.add('animated')
+
+                    // Разрешаем вертикальный свайп и запрещаем горизонтальный
+                    verticalSwiper.allowSlidePrev = true
+                    verticalSwiper.allowSlideNext = true
+
+                    horizontalSlider.allowSlidePrev = false
+                    horizontalSlider.allowSlideNext = false
+
+                    // Переключаем вертикальный слайдер на следующий слайд
+                    setTimeout(() => {
+                        verticalSwiper.slideNext()
+                    }, 3000)
                 }
             },
         },
 
         speed: 3000,
-    });
+    })
 
     verticalSwiper.on('slideChange', () => {
-        const header = document.querySelector('.header');
-        const isFirstSlide = verticalSwiper.activeIndex === 0;
+        const header = document.querySelector('.header')
+        const isFirstSlide = verticalSwiper.activeIndex === 0
 
         if (isFirstSlide) {
-            header.classList.remove('removed');
+            header.classList.remove('removed')
         } else {
-            header.classList.add('removed');
+            header.classList.add('removed')
         }
 
-        // Проверяем, достигнут ли индекс 1
         if (verticalSwiper.activeIndex === 1) {
-            verticalSwiper.allowSlidePrev = false;
-            verticalSwiper.allowSlideNext = false;
+            verticalSwiper.allowSlidePrev = false
+            verticalSwiper.allowSlideNext = false
 
-            // Разрешаем скролл для горизонтального слайдера
-            horizontalSlider.allowSlidePrev = false;
-            horizontalSlider.allowSlideNext = true;
-        } else {
-            verticalSwiper.allowSlidePrev = false;
-            verticalSwiper.allowSlideNext = true;
-
-            // Запрещаем скролл для горизонтального слайдера
-            horizontalSlider.allowTouchMove = false;
+            horizontalSlider.allowSlidePrev = false
+            horizontalSlider.allowSlideNext = true
         }
-    });
+    })
 
     document.addEventListener('wheel', (e) => {
         if (isAnimating) {
-            return;
+            return
         }
 
-        const delta = Math.sign(e.deltaY);
+        const delta = Math.sign(e.deltaY)
 
         if (verticalSwiper.activeIndex === 1) {
-            // Используем горизонтальный свайпер для прокрутки
             if (delta > 0) {
-                horizontalSlider.slideNext();
+                horizontalSlider.slideNext()
             } else if (delta < 0) {
-                horizontalSlider.slidePrev();
+                horizontalSlider.slidePrev()
             }
         } else {
-            // Используем вертикальный свайпер для прокрутки
             if (delta > 0) {
-                verticalSwiper.slideNext();
+                verticalSwiper.slideNext()
             } else if (delta < 0) {
-                verticalSwiper.slidePrev();
+                verticalSwiper.slidePrev()
             }
         }
-    });
+    })
 
-    let touchStartY;
+    let touchStartY
 
     document.addEventListener('touchstart', (event) => {
         if (isAnimating) {
-            return;
+            return
         }
 
-        touchStartY = event.touches[0].clientY;
-    });
+        touchStartY = event.touches[0].clientY
+    })
 
     document.addEventListener('touchend', (event) => {
-        const swipers = document.querySelectorAll('.swiper');
+        const swipers = document.querySelectorAll('.swiper')
         if (isAnimating) {
-            return;
+            return
         }
 
-        const touchEndY = event.changedTouches[0].clientY;
-        const deltaY = touchEndY - touchStartY;
+        const touchEndY = event.changedTouches[0].clientY
+        const deltaY = touchEndY - touchStartY
 
         swipers.forEach(swiper => {
             if (deltaY > 50) {
-                swiper.slidePrev();
+                swiper.slidePrev()
             } else if (deltaY < -50) {
-                swiper.slideNext();
+                swiper.slideNext()
             }
-        });
-    });
-};
+        })
+    })
+}
