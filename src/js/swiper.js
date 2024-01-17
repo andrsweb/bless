@@ -1,15 +1,15 @@
-import Swiper from "swiper"
+import Swiper from "swiper";
 
 document.addEventListener('DOMContentLoaded', () => {
-    'use strict'
+    'use strict';
 
-    sectionsScroll('.sections-scroll')
-})
+    sectionsScroll('.sections-scroll');
+});
 
 const sectionsScroll = (selector) => {
-    let isAnimating = false
+    let isAnimating = false;
 
-    if(!selector) return
+    if (!selector) return;
 
     const verticalSwiper = new Swiper(selector, {
         direction: 'vertical',
@@ -22,15 +22,15 @@ const sectionsScroll = (selector) => {
 
         on: {
             slideChangeTransitionStart: function () {
-                isAnimating = true
+                isAnimating = true;
             },
             slideChangeTransitionEnd: function () {
-                isAnimating = false
+                isAnimating = false;
             },
         },
 
-        speed: 3000
-    })
+        speed: 3000,
+    });
 
     const horizontalSlider = new Swiper('.slots-swiper', {
         parent: selector,
@@ -45,63 +45,67 @@ const sectionsScroll = (selector) => {
 
         on: {
             slideChangeTransitionStart: function () {
-                isAnimating = true
+                isAnimating = true;
             },
             slideChangeTransitionEnd: function () {
-                isAnimating = false
+                isAnimating = false;
             },
         },
 
-        speed: 3000
-    })
+        speed: 3000,
+    });
 
     verticalSwiper.on('slideChange', () => {
-        const header = document.querySelector('.header')
+        const header = document.querySelector('.header');
         const isFirstSlide = verticalSwiper.activeIndex === 0;
 
         if (isFirstSlide) {
-            header.classList.remove('removed')
+            header.classList.remove('removed');
         } else {
-            header.classList.add('removed')
+            header.classList.add('removed');
+        }
+
+        // Проверяем, достигнут ли индекс 1
+        if (verticalSwiper.activeIndex === 1) {
+            verticalSwiper.allowSlidePrev = false;
+            verticalSwiper.allowSlideNext = false;
+
+            // Разрешаем скролл для горизонтального слайдера
+            horizontalSlider.allowTouchMove = true;
+            horizontalSlider.allowSlidePrev = true;
+            horizontalSlider.allowSlideNext = true;
+        } else {
+            verticalSwiper.allowSlidePrev = true;
+            verticalSwiper.allowSlideNext = true;
+
+            // Запрещаем скролл для горизонтального слайдера
+            horizontalSlider.allowTouchMove = false;
         }
     });
 
-    document.addEventListener('wheel', (event) => {
+    document.addEventListener('wheel', (e) => {
         if (isAnimating) {
-            return
+            return;
         }
 
-        const delta = Math.sign(event.deltaY)
+        const delta = Math.sign(e.deltaY);
 
-        if (delta > 0) {
-            verticalSwiper.slideNext()
-        } else if (delta < 0) {
-            verticalSwiper.slidePrev()
+        if (verticalSwiper.activeIndex === 1) {
+            // Используем горизонтальный свайпер для прокрутки
+            if (delta > 0) {
+                horizontalSlider.slideNext();
+            } else if (delta < 0) {
+                horizontalSlider.slidePrev();
+            }
+        } else {
+            // Используем вертикальный свайпер для прокрутки
+            if (delta > 0) {
+                verticalSwiper.slideNext();
+            } else if (delta < 0) {
+                verticalSwiper.slidePrev();
+            }
         }
-    })
+    });
 
-    let touchStartY
-
-    document.addEventListener('touchstart', (event) => {
-        if (isAnimating) {
-            return
-        }
-
-        touchStartY = event.touches[0].clientY
-    })
-
-    document.addEventListener('touchend', (event) => {
-        if (isAnimating) {
-            return
-        }
-
-        const touchEndY = event.changedTouches[0].clientY
-        const deltaY = touchEndY - touchStartY
-
-        if (deltaY > 50) {
-            verticalSwiper.slidePrev()
-        } else if (deltaY < -50) {
-            verticalSwiper.slideNext()
-        }
-    })
-}
+    // ... (остальной код)
+};
