@@ -1,7 +1,19 @@
 @@include( 'template-parts/header/header.html', { title: 'Home Page' } )
 
 <main>
-	@@include( 'template-parts/sections/home/hero.html' )
+    <div class="swiper sections-scroll">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                @@include( 'template-parts/sections/home/hero.html' )
+            </div>
+            <div class="swiper-slide">
+                @@include( 'template-parts/sections/home/hero.html' )
+            </div>
+            <div class="swiper-slide">
+                @@include( 'template-parts/sections/home/hero.html' )
+            </div>
+        </div>
+    </div>
 </main>
 
 @@include( 'template-parts/footer/footer.html' )

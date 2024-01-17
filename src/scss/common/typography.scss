@@ -11,10 +11,22 @@ h6, .h6 {
 }
 
 h1, .h1 {
-	font-size: 32px;
+    color: $white;
+    font-family: $ff-title;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: 44px;
+    margin-bottom: 20px;
+
+    @media all and (min-width: $md) {
+        font-size: 40px;
+    }
 
 	@media all and (min-width: $lg) {
-		font-size: 36px
+		font-size: 70px;
+        line-height: 76px;
+        margin-bottom: 40px;
 	}
 }
 
@@ -56,10 +68,19 @@ p {
     margin: 0;
     color: $white;
     font-family: $ff;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: $fw-regular;
-    line-height: 28px;
+    line-height: 24px;
+
+    @media all and (min-width: $md) {
+        line-height: 24px;
+    }
+
+    @media all and (min-width: $lg) {
+        font-size: 20px;
+        line-height: 28px;
+    }
 }
 
 b, strong {

@@ -12,4 +12,13 @@
         backdrop-filter: $blur;
         border-radius: $bord15;
     }
+
+    &.blue {
+        padding: 16px 48px;
+        background-image: url('../../img/ui/btn-bg.png');
+        background-color: $accent;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: $bord20;
+    }
 }
