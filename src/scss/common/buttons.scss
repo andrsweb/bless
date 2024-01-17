@@ -11,6 +11,15 @@
         background-color: $dark-bg;
         backdrop-filter: $blur;
         border-radius: $bord15;
+        transition: opacity ease $tr;
+
+        &:hover {
+            opacity: $op;
+        }
+
+        &:active {
+            opacity: 1;
+        }
     }
 
     &.blue {
@@ -20,5 +29,14 @@
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: $bord20;
+        transition: opacity ease $tr;
+
+        &:hover {
+            opacity: $op;
+        }
+
+        &:active {
+            opacity: 1;
+        }
     }
 }

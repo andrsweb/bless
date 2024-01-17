@@ -23,10 +23,12 @@
 
     &__info {
         width: 100%;
-        max-width: 580px;
-        padding-bottom: 2.5vw;
+        max-width: 590px;
+        padding-bottom: 2vw;
 
         p {
+            width: 100%;
+            max-width: 523px;
             margin-bottom: 32px;
 
             @media all and (min-width: $lg) {
