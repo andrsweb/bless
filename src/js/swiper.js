@@ -11,7 +11,7 @@ const sectionsScroll = (selector) => {
 
     if(!selector) return
 
-    const swiper = new Swiper(selector, {
+    const verticalSwiper = new Swiper(selector, {
         direction: 'vertical',
         mousewheel: false,
         keyboard: {
@@ -55,9 +55,9 @@ const sectionsScroll = (selector) => {
         speed: 3000
     })
 
-    swiper.on('slideChange', () => {
+    verticalSwiper.on('slideChange', () => {
         const header = document.querySelector('.header')
-        const isFirstSlide = swiper.activeIndex === 0;
+        const isFirstSlide = verticalSwiper.activeIndex === 0;
 
         if (isFirstSlide) {
             header.classList.remove('removed')
@@ -74,11 +74,9 @@ const sectionsScroll = (selector) => {
         const delta = Math.sign(event.deltaY)
 
         if (delta > 0) {
-            swiper.slideNext()
-            horizontalSlider.slideNext()
+            verticalSwiper.slideNext()
         } else if (delta < 0) {
-            swiper.slidePrev()
-            .horizontalSlider.slidePrev()
+            verticalSwiper.slidePrev()
         }
     })
 
@@ -101,11 +99,9 @@ const sectionsScroll = (selector) => {
         const deltaY = touchEndY - touchStartY
 
         if (deltaY > 50) {
-            swiper.slidePrev()
-            horizontalSlider.slidePrev()
+            verticalSwiper.slidePrev()
         } else if (deltaY < -50) {
-            swiper.slideNext()
-            horizontalSlider.slideNext()
+            verticalSwiper.slideNext()
         }
     })
 }
