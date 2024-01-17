@@ -1,9 +1,18 @@
 .header {
     width: 100%;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 32px;
     z-index: 100;
+    transition: opacity ease $tr,
+        visibility ease $tr,
+        top ease $tr;
+
+    &.removed {
+        opacity: 0;
+        visibility: hidden;
+        top: -100%;
+    }
 
     &__wrapper {
         display: flex;

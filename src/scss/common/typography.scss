@@ -31,11 +31,27 @@ h1, .h1 {
 }
 
 h2, .h2 {
-	font-size: 24px;
+    text-align: center;
+    font-family: $ff;
+    font-size: 48px;
+    color: $white;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: 52px;
+    background: linear-gradient(93deg, #FFF 52.6%, rgba(255, 255, 255, 0.00) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
 
 	@media all and (min-width: $lg) {
-		font-size: 36px
+		font-size: 48px
 	}
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 h3, .h3 {
