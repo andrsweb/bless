@@ -18,10 +18,13 @@ const fullPageSettings = () => {
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
+            console.log(destination.index)
             if (destination.index === 1) {
                 fullpage_api.setAllowScrolling(false)
-            } else {
-                fullpage_api.setAllowScrolling(true)
+            }
+
+            if (destination.index === 2) {
+                fullpage_api.setAllowScrolling(false)
             }
         }
     })
