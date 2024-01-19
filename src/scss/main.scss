@@ -1,4 +1,5 @@
 //Libs
+@import '../../node_modules/fullpage.js/dist/fullpage.min';
 @import '../../node_modules/swiper/swiper-bundle.min';
 
 // Defaults styles.
@@ -19,3 +20,4 @@
 @import 'sections/home/hero';
 @import 'sections/home/slots';
 @import 'sections/home/nft';
+@import 'sections/home/apply';

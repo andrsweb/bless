@@ -1,23 +1,20 @@
 @@include( 'template-parts/header/header.html', { title: 'Home Page' } )
 
 <main>
-    <div class="swiper sections-scroll">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                @@include( 'template-parts/sections/home/hero.html' )
-            </div>
-            <div class="swiper-slide">
-                @@include( 'template-parts/sections/home/slots.html' )
-            </div>
-            <div class="swiper-slide">
-                @@include( 'template-parts/sections/home/nft.html' )
-            </div>
-            <div class="swiper-slide">
-                @@include( 'template-parts/sections/home/hero.html' )
-            </div>
+    <div id="fullpage">
+        <div class="section">
+            @@include( 'template-parts/sections/home/hero.html' )
+        </div>
+        <div class="section">
+          @@include('./template-parts/sections/home/slots.html')
+        </div>
+        <div class="section">
+            @@include('./template-parts/sections/home/nfts.html')    
+        </div>
+        <div class="section">
+            @@include( 'template-parts/sections/home/apply.html' )
         </div>
     </div>
 </main>
 
 @@include( 'template-parts/footer/footer.html' )
-

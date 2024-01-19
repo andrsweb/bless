@@ -1,0 +1,25 @@
+.footer {
+    padding: 16px 0;
+    background-color: $black;
+
+    &__wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__year {
+        color: $gray;
+        font-family: $ff;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: $fw-medium;
+        line-height: 20px;
+    }
+
+    &__links {
+        display: flex;
+        gap: 12px;
+    }
+}

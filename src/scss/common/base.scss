@@ -18,7 +18,7 @@ body {
 	font-size: $fs-md;
 	line-height: $lh;
 	color: $black;
-	background-color: $white
+	background-color: $black
 }
 
 img {
@@ -50,4 +50,8 @@ ul {
 	.footer {
 		margin-top: auto
 	}
+}
+
+.fp-overflow {
+    height: 100%;
 }

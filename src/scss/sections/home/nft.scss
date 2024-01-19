@@ -1,6 +1,10 @@
 .nfts {
     background-color: $black;
-    height: 100dvh;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
     &__wrapper {
         width: 100%;
@@ -8,6 +12,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+       
     }
 
     .nft {
@@ -54,13 +59,13 @@
     }
 
     .swiper {
-        width: 100%;
+        overflow: visible;
 
         &-slide {
-            background-color: $black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: opacity ease $tr;
+            &-prev, &-next {
+                opacity: 0.1;
+            }
         }
     }
 }

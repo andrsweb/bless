@@ -7,6 +7,7 @@
     transition: opacity ease $tr,
         visibility ease $tr,
         top ease $tr;
+        display: none;
 
     &.removed {
         opacity: 0;
@@ -73,13 +74,17 @@
         gap: 4px;
         padding: 0;
     }
+}
 
-    .social__link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-        background-color: $dark-bg;
-        border-radius: $bord100;
-    }
+.social__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: $dark-bg;
+    border-radius: $bord100;
+}
+
+.fp-watermark {
+    display: none;
 }
