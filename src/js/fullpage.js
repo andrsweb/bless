@@ -46,6 +46,20 @@ const initSwiper = (selector) => {
         slidesPerView: 1,
         spaceBetween: 20,
         speed: 1200,
+
+        on: {
+            slideChange: () => {
+                const prevSlide = swiper.slides[swiper.previousIndex]
+                if (prevSlide) {
+                    prevSlide.classList.remove('animated')
+                }
+
+                const isLastSlide = swiper.isEnd
+                if (isLastSlide) {
+                    swiper.slides[swiper.activeIndex].classList.add('animated')
+                }
+            }
+        }
     })
 
     let isTransitioning = false
@@ -64,7 +78,7 @@ const initSwiper = (selector) => {
 
             setTimeout(() => isTransitioning = false, 1200)
 
-            setTimeout(() => fullpage_api.setAllowScrolling(true), 1200)
+            setTimeout(() => fullpage_api.setAllowScrolling(true), 2000)
         }
     })
 }
