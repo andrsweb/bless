@@ -1,3 +1,19 @@
+.section.second-anim.active {
+    .h2 {
+        animation: slotsH1 forwards 1s ease;
+
+        @keyframes slotsH1 {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    }
+}
+
 .slots {
     background-color: $black;
     padding-top: 50px;
@@ -32,9 +48,26 @@
     }
 
     &__img {
-        width: 22vw;
+        width: 100%;
         height: auto;
         overflow-y: hidden;
+        position: relative;
+
+        @media all and (min-width: $sm) {
+            width: 70%;
+        }
+
+        @media all and (min-width: $lg) {
+            width: 40%;
+        }
+
+        .new-slot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+
+        }
 
         img {
             width: 100%;
@@ -56,10 +89,108 @@
         max-width: 1200px;
 
         &-slide {
-            transition: scale ease 2s;
+            transition: scale ease 10s,
+            transform ease 10s;
 
             &.animated {
-                scale: 2;
+                animation: forSlot 8s forwards ease;
+
+                @keyframes forSlot {
+                    0% {
+                        scale: 1;
+                        transform: translateY(0);
+                    }
+
+                    90% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        opacity: 0;
+                        scale: 4;
+                        transform: translateY(15%);
+                    }
+                }
+
+                @media all and (min-width: 1500px) {
+                    @keyframes forSlot {
+                        0% {
+                            scale: 1;
+                            transform: translateY(0);
+                        }
+    
+                        90% {
+                            opacity: 1;
+                        }
+    
+                        100% {
+                            opacity: 0;
+                            scale: 6;
+                            transform: translateY(15%);
+                        }
+                    }    
+                }
+
+                .slot {
+                    .prev-slot {
+                        animation: prevSlot forwards 4s ease;
+
+                        @keyframes prevSlot {
+                            0% {
+                                position: static;
+                            }
+
+                            99% {
+                                position: static;
+                            }
+                            100% {
+                               display: none;
+                            }
+                        }
+                    }
+
+                    .new-slot {
+                        animation: newSlot forwards 4s ease;
+                        animation-delay:1.5s;
+
+                        @keyframes newSlot {
+                            0% {
+                                z-index: 0;
+                                opacity: 0;
+                            }
+
+                            50% {
+                                z-index: 10;
+                                opacity: 1;
+                            }
+
+                            100% {
+                                z-index: 10;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.closed {
+                animation: forSlotClose 6s forwards ease;
+
+                @keyframes forSlotClose {
+                    0% {
+                        opacity: 0;
+                        scale: 6;
+                        transform: translateY(15%);
+                    }
+
+                    75% {
+                        opacity: 1;
+                    }
+
+                    100% {
+                        scale: 1;
+                        transform: translateY(0);
+                    }
+                }              
             }
         }
     }
@@ -70,23 +201,42 @@
         position: relative;
 
         .slot__shadow1 {
-            width: 100%;
-            height: auto;
+            width: 500px;
+            height: 500px;
             position: absolute;
-            left: 50%;
-            top: 30%;
-            transform: translate(-50%,-50%);
+            left: 30%;
+            top: 0;            
             z-index: -1;
+
+            @media all and (min-width: $md) {
+                transform: translate(-50%,-50%);
+                left: 50%;
+                top: 30%;  
+                width: 100%;
+                height: auto;
+            }
         }
 
         .slot__shadow2 {
-            width: 100%;
-            height: auto;
+            width: 500px;
+            height: 500px;
             position: absolute;
-            left: 50%;
-            top: 30%;
-            transform: translate(-50%,-50%);
+            left: 80%;
+            top: 10%;
             z-index: -1;
+
+            @media all and (min-width: $md) {
+                transform: translate(-50%,-50%);
+                left: 50%;
+                top: 60%;  
+                width: 1000px;
+                height: 800px;
+            }
+
+            @media all and (min-width: $lg) {
+                width: 100%;
+                height: auto;
+            }
         }
     }
 }

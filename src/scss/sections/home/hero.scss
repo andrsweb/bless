@@ -16,6 +16,22 @@
         background: linear-gradient(180deg, #00000000 27.05%, rgba(0, 0, 0, 0.815) 100%);
     }
 
+	.h1 {
+		animation: heroH1 forwards $tr ease;
+
+		@keyframes heroH1 {
+		  0% {
+			opacity: 0;
+			transform: translateX(-100%);
+		  }
+	
+		  100% {
+			opacity: 1;
+			transform: translateX(0);
+		  }
+		}
+	}
+
     &__bg {
         position: absolute;
         width: 100%;
@@ -29,6 +45,18 @@
             height: 100%;
             object-fit: cover;
         }
+
+		animation: heroBg forwards 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+		@keyframes heroBg {
+		  0% {
+			opacity: 0;
+		  }
+	
+		  100% {
+			opacity: 1;
+		  }
+		}
     }
 
     &__info {
@@ -44,6 +72,40 @@
             @media all and (min-width: $lg) {
                 margin-bottom: 52px;
             }
+
+			animation: heroP forwards 0.5s ease;
+
+			@keyframes heroP {
+			  0% {
+				opacity: 0;
+				transform: translateX(-100%);
+			  }
+
+			  35% {
+				opacity: 0;
+			  }
+		
+			  100% {
+				opacity: 1;
+				transform: translateX(0);
+			  }
+			}
         }
+
+		.button {
+			animation: heroBtn forwards 0.7s ease;
+
+			@keyframes heroBtn {
+			0% {
+				opacity: 0;
+				transform: translateX(-100%);
+			}
+		
+			100% {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			}
+		}
     }
 }

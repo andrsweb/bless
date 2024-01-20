@@ -33,11 +33,11 @@ h1, .h1 {
 h2, .h2 {
     text-align: center;
     font-family: $ff;
-    font-size: 48px;
+    font-size: 32px;
+    line-height: 1;
     color: $white;
     font-style: normal;
     font-weight: $fw-bold;
-    line-height: 52px;
     background: linear-gradient(93deg, #FFF 52.6%, rgba(255, 255, 255, 0.00) 100%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -45,7 +45,8 @@ h2, .h2 {
     position: relative;
 
 	@media all and (min-width: $lg) {
-		font-size: 48px
+		font-size: 48px;
+        line-height: 52px;
 	}
 
     &__wrapper {

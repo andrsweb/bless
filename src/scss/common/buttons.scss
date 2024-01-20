@@ -7,11 +7,15 @@
     line-height: 24px;
 
     &.dark {
-        padding: 12px 24px;
+        padding: 12px;
         background-color: $dark-bg;
         backdrop-filter: $blur;
         border-radius: $bord15;
         transition: opacity ease $tr;
+
+        @media all and (min-width: $sm) {
+            padding: 12px 24px;
+        }
 
         &:hover {
             opacity: $op;
@@ -23,13 +27,17 @@
     }
 
     &.blue {
-        padding: 16px 48px;
+        padding: 16px 24px;
         background-image: url('../../img/ui/btn-bg.png');
         background-color: $accent;
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: $bord20;
         transition: opacity ease $tr;
+
+        @media all and (min-width: $sm) {
+            padding: 16px 48px;
+        }
 
         &:hover {
             opacity: $op;

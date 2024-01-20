@@ -10,6 +10,18 @@
         visibility ease 0.6s,
         top ease 0.6s;
 
+        animation: headerAnim forwards 0.6s ease;
+
+		@keyframes headerAnim {
+		  0% {
+            transform: translateY(-100%);
+          }
+	
+		  100% {
+            transform: translateY(0);
+		  }
+		}
+
     &.removed {
         opacity: 0;
         visibility: hidden;
@@ -38,6 +50,19 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        display: none;
+
+        @media all and (min-width: $lg) {
+            display: block;
+        }
+    }
+
+    .button {
+        display: none;
+
+        @media all and (min-width: $md) {
+            display: flex;
+        }
     }
 
     .menu {

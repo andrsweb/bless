@@ -19,19 +19,34 @@
         width: 100%;
         max-width: 1200px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         position: relative;
 
+        @media all and (min-width: $lg) {
+            flex-direction: row;
+        }
+
         &__img {
-            width: 590px;
-            height: 590px;
+            width: 390px;
+            height: 364px;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            @media all and (min-width: $lg) {
+                width: 590px;
+                 height: 590px;
+            }
            
             &_inner {
-                width: 514px;
-                height: 514px;
+                width: 327px;
+                height: 348px;
+
+                @media all and (min-width: $lg) {
+                    width: 514px;
+                    height: 514px;
+                }
             }
         }
 
@@ -50,11 +65,17 @@
             max-width: 488px;
             color: $white;
             font-family: $ff;
-            font-size: 32px;
+            font-size: 20px;
             font-style: normal;
             font-weight: $fw-regular;
-            line-height: 36px;
-            margin-right: 20px;
+            line-height: 24px;
+           
+
+            @media all and (min-width: $lg) {
+                font-size: 32px;
+                margin-right: 20px;
+                line-height: 36px;
+            }
         }
     }
 
