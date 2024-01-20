@@ -23,14 +23,12 @@ const fullPageSettings = () => {
 
             if (destination.index === 1) {
                 fullpage_api.setAllowScrolling(false)
-            }
+                header.classList.add('removed')
+            } else if(destination.index === 0) header.classList.remove('removed')
 
             if (destination.index === 2) {
-                header.classList.add('removed')
                 fullpage_api.setAllowScrolling(false)
-            } else {
-                header.classList.remove('removed')
-            }
+            } 
         }
     })
 }
