@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const fullPageSettings = () => {
     const header = document.querySelector('.header')
+    const sections = document.querySelectorAll('.fp-section')
 
     new fullpage('#fullpage', {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
@@ -20,22 +21,25 @@ const fullPageSettings = () => {
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
+
             if (destination.index === 1) {
+                fullpage_api.setAllowScrolling(false) 
+            } 
+
+            if (destination.index === 2) {
                 fullpage_api.setAllowScrolling(false)
-                header.classList.add('removed')
-            } else if (destination.index === 0) {
-                header.classList.remove('removed')
-                fullpage_api.setAllowScrolling(false)
-            } else if (destination.index > 2) {
-                fullpage_api.setAllowScrolling(true)
             }
+
+            if(destination.index > 0) {
+                header.classList.add('removed')
+            } else header.classList.remove('removed')
         }
-        
     })
 }
 
 const initSwiper = (selector) => {
     const swiper = new Swiper(selector, {
+        direction: 'horizontal',
         slidesPerView: 1,
         spaceBetween: 20,
         speed: 1200,
