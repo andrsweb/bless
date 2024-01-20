@@ -57,9 +57,14 @@
 
         &-slide {
             transition: opacity ease $tr,
+                        scale ease 2s;
 
             &-prev, &-next {
                 opacity: 0.1;
+            }
+
+            &.animated {
+                scale: 2;
             }
         }
     }

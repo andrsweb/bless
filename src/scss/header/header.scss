@@ -4,10 +4,9 @@
     left: 0;
     top: 32px;
     z-index: 100;
-    transition: opacity ease $tr,
-        visibility ease $tr,
-        top ease $tr;
-        display: none;
+    transition: opacity ease 0.6s,
+        visibility ease 0.6s,
+        top ease 0.6s;
 
     &.removed {
         opacity: 0;

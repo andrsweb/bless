@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const fullPageSettings = () => {
+    const header = document.querySelector('.header')
+
     new fullpage('#fullpage', {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
         fitToSection: true,
@@ -18,9 +20,11 @@ const fullPageSettings = () => {
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
-            console.log(destination.index)
             if (destination.index === 1) {
                 fullpage_api.setAllowScrolling(false)
+                header.classList.add('removed')
+            } else if (destination.index === 0) {
+                header.classList.remove('removed')
             }
 
             if (destination.index === 2) {
@@ -34,20 +38,13 @@ const initSwiper = (selector) => {
     const swiper = new Swiper(selector, {
         slidesPerView: 1,
         spaceBetween: 20,
-        speed: 1200, 
+        speed: 1200,
     })
 
     let isTransitioning = false
 
     swiper.on('slideChangeTransitionEnd', () => {
-        if (swiper.isEnd) {
-            setTimeout(() => {
-                fullpage_api.setAllowScrolling(true, 'down')
-                document.querySelector(selector).classList.add('animated')
-            }, 1200)
-        } else {
-            document.querySelector(selector).classList.remove('animated')
-        }
+        updateAnimatedClass(swiper)
     })
 
     document.querySelector(selector).addEventListener('wheel', (e) => {
@@ -67,10 +64,22 @@ const initSwiper = (selector) => {
         isTransitioning = true
 
         isScrollingDown ? swiper.slideNext() : swiper.slidePrev()
-
-        setTimeout(() => {
-            fullpage_api.setAllowScrolling(true)
-            isTransitioning = false
-        }, 1200)
     })
+
+    swiper.on('transitionEnd', () => {
+        fullpage_api.setAllowScrolling(true)
+        isTransitioning = false
+        updateAnimatedClass(swiper)
+    })
+
+    const updateAnimatedClass = (swiperInstance) => {
+        swiperInstance.slides.forEach((slide, index) => {
+            const isLastSlide = index === swiperInstance.slides.length - 1
+            if (isLastSlide && swiperInstance.isEnd) {
+                slide.classList.add('animated')
+            } else {
+                slide.classList.remove('animated')
+            }
+        })
+    }
 }
