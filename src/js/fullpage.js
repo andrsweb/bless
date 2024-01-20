@@ -5,12 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
     fullPageSettings()
+
     initSwiper('.swiper.slot-swiper')
     initSwiper('.swiper.nft-swiper')
 })
 
 const fullPageSettings = () => {
     const header = document.querySelector('.header')
+    const footer = document.querySelector('.footer')
 
     new fullpage('#fullpage', {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
@@ -20,15 +22,20 @@ const fullPageSettings = () => {
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
-
             if (destination.index === 1) {
                 fullpage_api.setAllowScrolling(false)
                 header.classList.add('removed')
-            } else if(destination.index === 0) header.classList.remove('removed')
+            } else if(destination.index === 0) {
+                header.classList.remove('removed')
+            }
 
             if (destination.index === 2) {
                 fullpage_api.setAllowScrolling(false)
-            } 
+            }
+
+            if (destination.index === 3) {
+                footer.classList.add('visible')
+            } else footer.classList.remove('visible')
         }
     })
 }
@@ -55,9 +62,9 @@ const initSwiper = (selector) => {
                 swiper.slidePrev()
             }
 
-            setTimeout(() => {
-                isTransitioning = false
-            }, 1200)
+            setTimeout(() => isTransitioning = false, 1200)
+
+            setTimeout(() => fullpage_api.setAllowScrolling(true), 1200)
         }
     })
 }
