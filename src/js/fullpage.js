@@ -25,12 +25,12 @@ const fullPageSettings = () => {
                 header.classList.add('removed')
             } else if (destination.index === 0) {
                 header.classList.remove('removed')
-            }
-
-            if (destination.index === 2) {
                 fullpage_api.setAllowScrolling(false)
+            } else if (destination.index > 2) {
+                fullpage_api.setAllowScrolling(true)
             }
         }
+        
     })
 }
 
@@ -40,46 +40,4 @@ const initSwiper = (selector) => {
         spaceBetween: 20,
         speed: 1200,
     })
-
-    let isTransitioning = false
-
-    swiper.on('slideChangeTransitionEnd', () => {
-        updateAnimatedClass(swiper)
-    })
-
-    document.querySelector(selector).addEventListener('wheel', (e) => {
-        if (isTransitioning) {
-            return
-        }
-
-        const delta = e.deltaY
-        const isScrollingDown = delta > 0
-
-        if ((isScrollingDown && swiper.isEnd) || (!isScrollingDown && swiper.isBeginning)) {
-            fullpage_api.setAllowScrolling(true, isScrollingDown ? 'down' : 'up')
-        } else {
-            fullpage_api.setAllowScrolling(false)
-        }
-
-        isTransitioning = true
-
-        isScrollingDown ? swiper.slideNext() : swiper.slidePrev()
-    })
-
-    swiper.on('transitionEnd', () => {
-        fullpage_api.setAllowScrolling(true)
-        isTransitioning = false
-        updateAnimatedClass(swiper)
-    })
-
-    const updateAnimatedClass = (swiperInstance) => {
-        swiperInstance.slides.forEach((slide, index) => {
-            const isLastSlide = index === swiperInstance.slides.length - 1
-            if (isLastSlide && swiperInstance.isEnd) {
-                slide.classList.add('animated')
-            } else {
-                slide.classList.remove('animated')
-            }
-        })
-    }
 }

@@ -56,12 +56,7 @@
         max-width: 1200px;
 
         &-slide {
-            transition: opacity ease $tr,
-                        scale ease 2s;
-
-            &-prev, &-next {
-                opacity: 0.1;
-            }
+            transition: scale ease 2s;
 
             &.animated {
                 scale: 2;
