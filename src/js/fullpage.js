@@ -102,6 +102,7 @@ const initSlotSwiper = (selector) => {
 						fullpage_api.moveSectionDown()
 						lastSlide.classList.remove('animated')
 						lastSlide.classList.add('closed')
+                        
 					}, LAST_SLOT_ANIMATION_DURATION)
 				}
 			}
