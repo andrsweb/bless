@@ -10,7 +10,7 @@ const followCursor = () => {
     const listItems = document.querySelectorAll('.menu-item')
     const ul = document.querySelector('.header__nav')
 
-    if(!marker && !current || !listItems.length && !ul) return
+    if(!ul) return
 
     marker.style.bottom = `-${marker.offsetHeight / 2}px`
     marker.style.left = `${current.offsetLeft}px`

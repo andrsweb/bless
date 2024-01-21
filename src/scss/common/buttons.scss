@@ -33,15 +33,15 @@
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: $bord20;
-        transition: opacity ease $tr;
+        transition: scale ease $tr;
 
         @media all and (min-width: $sm) {
             padding: 16px 48px;
         }
 
         &:hover {
-            opacity: $op;
-        }
+            scale: 1.04;
+         }
 
         &:active {
             opacity: 1;

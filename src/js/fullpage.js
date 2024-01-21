@@ -1,5 +1,6 @@
 import fullpage from 'fullpage.js'
 import Swiper from 'swiper'
+import {Pagination} from 'swiper/modules'
 
 const
 	LAST_SLOT_ANIMATION_DURATION	= 7500,
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const fullPageSettings = () => {
     const header = document.querySelector('.header')
     const footer = document.querySelector('.footer')
+    const mobileLinks = document.querySelector('.mobile__links')
     let slotSwiperAnimated = false
 
     new fullpage('#fullpage', {
@@ -47,6 +49,10 @@ const fullPageSettings = () => {
 				default:
 					footer.classList.remove('visible')
 			}
+
+            if(footer.classList.contains('visible')) {
+                mobileLinks.classList.add('hidden')
+            } else mobileLinks.classList.remove('hidden')
 
             if(destination.index === 1) header.classList.add('removed')
             else header.classList.remove('removed')
@@ -78,6 +84,12 @@ const initSlotSwiper = (selector) => {
 		spaceBetween: 20,
 		speed: SLIDE_TRANSITION_DURATION,
 		allowTouchMove: false,
+        modules: [Pagination],
+
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
 
 		on: {
 			slideChange: () => {

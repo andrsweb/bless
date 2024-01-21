@@ -45,6 +45,7 @@
     &__slides {
         display: flex;
         justify-content: center;
+        position: relative;
     }
 
     &__img {
@@ -107,9 +108,47 @@
 
                     100% {
                         opacity: 0;
-                        scale: 4;
+                        scale: 1.8;
                         transform: translateY(15%);
                     }
+                }
+
+                @media all and (min-width: $sm) {
+                    @keyframes forSlot {
+                        0% {
+                            scale: 1;
+                            transform: translateY(0);
+                        }
+    
+                        90% {
+                            opacity: 1;
+                        }
+    
+                        100% {
+                            opacity: 0;
+                            scale: 2.5;
+                            transform: translateY(15%);
+                        }
+                    }    
+                }
+
+                @media all and (min-width: $lg) {
+                    @keyframes forSlot {
+                        0% {
+                            scale: 1;
+                            transform: translateY(0);
+                        }
+    
+                        90% {
+                            opacity: 1;
+                        }
+    
+                        100% {
+                            opacity: 0;
+                            scale: 3.5;
+                            transform: translateY(15%);
+                        }
+                    }    
                 }
 
                 @media all and (min-width: 1500px) {
@@ -125,7 +164,7 @@
     
                         100% {
                             opacity: 0;
-                            scale: 6;
+                            scale: 5.8;
                             transform: translateY(15%);
                         }
                     }    
@@ -193,6 +232,35 @@
                 }              
             }
         }
+
+        &-pagination {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            top: auto;
+            left: 0;
+            bottom: 10vh;
+            right: auto;
+
+            &-bullet {
+                width: 8px;
+                height: 8px;
+                opacity: 1;
+                background-color: rgba(255, 255, 255, 0.10);
+                transition: width ease 1s, border-radius ease $tr,
+                        background-color ease 1s;
+
+                &-active {
+                    border-radius: 10px;
+                    width: 24px;
+                    background-color: $accent;
+                }
+            }
+
+            @media all and (min-width: $lg) {
+                display: none;
+            }
+        }
     }
 
     .slot {
@@ -209,9 +277,16 @@
             z-index: -1;
 
             @media all and (min-width: $md) {
+                left: 30%;
+                top: 0;  
+                width: 1000px;
+                height: 1000px;
+            }
+
+            @media all and (min-width: $lg) {
                 transform: translate(-50%,-50%);
                 left: 50%;
-                top: 30%;  
+                top: 50%;  
                 width: 100%;
                 height: auto;
             }
@@ -226,14 +301,16 @@
             z-index: -1;
 
             @media all and (min-width: $md) {
-                transform: translate(-50%,-50%);
-                left: 50%;
-                top: 60%;  
-                width: 1000px;
+                left: -20%;
+                top: 0;  
+                width: 1500px;
                 height: 800px;
             }
 
             @media all and (min-width: $lg) {
+                transform: translate(-50%,-50%);
+                left: 50%;
+                top: 50%;  
                 width: 100%;
                 height: auto;
             }

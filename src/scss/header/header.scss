@@ -118,7 +118,6 @@
     pointer-events: none;
 }
 
-
 .social__link {
     display: flex;
     align-items: center;
@@ -135,4 +134,22 @@
 
 .fp-watermark {
     display: none;
+}
+
+.mobile__links {
+    position: fixed;
+    right: 20px;
+    top: 80%;
+    z-index: 100;
+    flex-direction: column;
+    transition: transform ease $tr, opacity ease $tr;
+
+    @media all and (min-width: $md) {
+        display: none;
+    }
+
+    &.hidden {
+        opacity: 0;
+        transform: translateX(100%);
+    }
 }
