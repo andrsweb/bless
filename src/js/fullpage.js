@@ -3,11 +3,10 @@ import Swiper from 'swiper'
 import {Pagination} from 'swiper/modules'
 
 const
-	LAST_SLOT_ANIMATION_DURATION	= 7500,
+	LAST_SLOT_ANIMATION_DURATION	= 8000,
 	SLIDE_TRANSITION_DURATION		= 900
 
-let slotSwiper,
-	slotSwiperLastSlide,
+let 
 	swipedStart,
 	swipedEnd
 
@@ -31,7 +30,6 @@ const fullPageSettings = () => {
 
     new fullpage('#fullpage', {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
-        fitToSection: true,
         css3: true,
         anchors: ['firstPage', 'secondPage', '3rdPage', 'lastPage'],
         menu: '#menu',

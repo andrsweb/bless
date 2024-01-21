@@ -66,8 +66,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            z-index: -1;
-
+            z-index: 1;
         }
 
         img {
@@ -90,8 +89,8 @@
         max-width: 1200px;
 
         &-slide {
-            transition: scale ease 10s,
-            transform ease 10s;
+            transition: scale ease 8s,
+            transform ease 8s;
 
             &.animated {
                 animation: forSlot 8s forwards ease;
@@ -172,39 +171,37 @@
 
                 .slot {
                     .prev-slot {
-                        animation: prevSlot forwards 4s ease;
+                        animation: prevSlot forwards 4s linear;
 
                         @keyframes prevSlot {
                             0% {
-                                position: static;
+                                opacity: 1;
                             }
 
-                            99% {
-                                position: static;
+                            80% {
+                                opacity: 0;
                             }
+
                             100% {
-                               display: none;
+                                opacity: 0;
                             }
                         }
                     }
 
                     .new-slot {
-                        animation: newSlot forwards 4s ease;
-                        animation-delay:1.5s;
+                        animation: newSlot forwards 4s linear;
 
                         @keyframes newSlot {
                             0% {
-                                z-index: 0;
                                 opacity: 0;
                             }
 
-                            50% {
-                                z-index: 10;
+                            80% {
                                 opacity: 1;
                             }
 
                             100% {
-                                z-index: 10;
+                                opacity: 1;
                             }
                         }
                     }
@@ -212,7 +209,7 @@
             }
 
             &.closed {
-                animation: forSlotClose 6s forwards ease;
+                animation: forSlotClose 8s forwards linear;
 
                 @keyframes forSlotClose {
                     0% {
@@ -229,7 +226,39 @@
                         scale: 1;
                         transform: translateY(0);
                     }
-                }              
+                }
+                
+                .new-slot {
+                    animation: newSlotClose forwards 4s linear;
+
+                    @keyframes newSlotClose {
+                        0% {
+                            opacity: 1;
+                        }
+
+                        80% {
+                            opacity: 1;
+                        }
+
+                        100% {
+                            opacity: 0;
+                        }
+                    }
+                }
+
+                .prev-slot {
+                    animation: prevSlotClose forwards 4s linear;
+
+                    @keyframes prevSlotClose {
+                        0% {
+                            opacity: 0;
+                        }
+
+                        100% {
+                            opacity: 1;
+                        }
+                    }
+                }
             }
         }
 
