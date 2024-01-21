@@ -98,6 +98,7 @@ const initSlotSwiper = (selector) => {
 					lastSlide.classList.remove('closed')
 					lastSlide.classList.add('animated')
 					fullpage_api.setAllowScrolling(false)
+
 					setTimeout(() => {
 						fullpage_api.moveSectionDown()
 						lastSlide.classList.remove('animated')
