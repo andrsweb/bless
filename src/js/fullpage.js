@@ -21,10 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const fullPageSettings = () => {
+    const fullpageWrapper = document.querySelector('.fullpage__wrapper')
     const header = document.querySelector('.header')
     const footer = document.querySelector('.footer')
     const mobileLinks = document.querySelector('.mobile__links')
     let slotSwiperAnimated = false
+
+    if(!fullpageWrapper) return
 
     new fullpage('#fullpage', {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
@@ -78,6 +81,10 @@ const fullPageSettings = () => {
 }
 
 const initSlotSwiper = (selector) => {
+    const swiperWrapper = document.querySelector(selector)
+
+    if(!swiperWrapper) return
+
 	const swiper = new Swiper(selector, {
 		direction: 'horizontal',
 		slidesPerView: 1,
@@ -113,11 +120,13 @@ const initSlotSwiper = (selector) => {
 				}
 			}
 		}
-	})
 
+        
+	})
 	let isTransitioning = false
 
 	swiper.el.addEventListener('wheel', e => {
+        if(!swiper.el) return
 		const direction = e.deltaY > 0 ? 'next' : 'prev'
 
 		if (!isTransitioning) {
@@ -167,6 +176,10 @@ const initSlotSwiper = (selector) => {
 }
 
 const initNftSwiper = (selector) => {
+    const swiperWrapper = document.querySelector(selector)
+
+    if(!swiperWrapper) return
+
     const swiper = new Swiper(selector, {
         direction: 'horizontal',
         slidesPerView: 1,
