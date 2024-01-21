@@ -28,20 +28,14 @@ const fullPageSettings = () => {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
         fitToSection: true,
         css3: true,
-        anchors: ['firstSection', 'secondSection', 'thirdSection', 'fourthSection'],
+        anchors: ['firstPage', 'secondPage', '3rdPage'],
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
 			switch( destination.index ){
-				case 0:
-					header.classList.remove('removed')
-					break
-
 				case 1:
 					fullpage_api.setAllowScrolling(false)
-					header.classList.add('removed')
 					break
-
 				case 2:
 					fullpage_api.setAllowScrolling(false)
 					break
@@ -53,6 +47,9 @@ const fullPageSettings = () => {
 				default:
 					footer.classList.remove('visible')
 			}
+
+            if(destination.index === 1) header.classList.add('removed')
+            else header.classList.remove('removed')
         },
 
         onLeave: function (origin, destination, direction) {

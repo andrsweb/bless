@@ -7,8 +7,7 @@
     top: 32px;
     z-index: 100;
     transition: opacity ease 0.6s,
-        visibility ease 0.6s,
-        top ease 0.6s;
+            transform ease 0.6s;
 
         animation: headerAnim forwards 0.6s ease;
 
@@ -24,8 +23,7 @@
 
     &.removed {
         opacity: 0;
-        visibility: hidden;
-        top: -100%;
+        transform: translateY(-100%);
     }
 
     &__wrapper {
@@ -109,6 +107,11 @@
     padding: 12px;
     background-color: $dark-bg;
     border-radius: $bord100;
+    transition: background-color ease $tr;
+
+    &:hover {
+        background-color: $accent;
+    }
 }
 
 .fp-watermark {
