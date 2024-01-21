@@ -114,7 +114,7 @@
     background-color: $dark-bg;
     height: 48px;
     border-radius: $bord100;
-    transition:width 1s, left 1s;
+    transition:width 1s ease, left 1s ease, opacity 1s ease;
     pointer-events: none;
 }
 

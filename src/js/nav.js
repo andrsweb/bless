@@ -10,6 +10,8 @@ const followCursor = () => {
     const listItems = document.querySelectorAll('.menu-item')
     const ul = document.querySelector('.header__nav')
 
+    if(!marker && !current || !listItems.length && !ul) return
+
     marker.style.bottom = `-${marker.offsetHeight / 2}px`
     marker.style.left = `${current.offsetLeft}px`
     marker.style.width = `${current.offsetWidth}px`
@@ -25,9 +27,12 @@ const followCursor = () => {
         })
     })
 
+    ul.addEventListener('mouseenter', () => {
+        marker.style.opacity = 1
+    })
+
     ul.addEventListener('mouseleave', () => {
-        marker.style.left = `${current.offsetLeft}px`
-        marker.style.width = `${current.offsetWidth}px`
+       marker.style.opacity = 0
     })
 }
 
