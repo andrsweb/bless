@@ -1,7 +1,16 @@
 <section class="hero">
     <div class="container">
         <div class="hero__bg">
-            <img src="img/hero/hero-bg.png" width="400" height="400" alt="">
+            <picture>
+                <source type="image/webp" media="(min-width: 0px) and (max-width: 768px)" srcset="img/hero/hero-bg-mobile.webp">
+                <source type="image/png" media="(min-width: 0px) and (max-width: 768px)" srcset="img/hero/hero-bg-mobile.png">
+
+                <source type="image/webp" media="(min-width: 0px) and (max-width: 1024px)" srcset="img/hero/hero-bg-tab.webp">
+                <source type="image/png" media="(min-width: 0px) and (max-width: 1024px)" srcset="img/hero/hero-bg-tab.png">
+        
+                <source type="image/webp" media="(min-width: 1024px)" srcset="img/hero/hero-bg.png">
+                <img src="img/hero/hero-bg.png" width="400" height="400"  alt="" />
+            </picture>	
         </div>
         <div class="hero__wrapper">
             <div class="hero__info">
