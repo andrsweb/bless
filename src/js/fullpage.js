@@ -120,8 +120,6 @@ const initSlotSwiper = (selector) => {
 				}
 			}
 		}
-
-        
 	})
 	let isTransitioning = false
 
@@ -188,6 +186,8 @@ const initNftSwiper = (selector) => {
     })
 
     let isTransitioning = false
+    let touchStartY = 0
+    let touchEndY = 0
 
     swiper.el.addEventListener('wheel', e => {
         const direction = e.deltaY > 0 ? 'next' : 'prev'
@@ -210,4 +210,36 @@ const initNftSwiper = (selector) => {
             }
         }
     })
+
+    swiper.el.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY
+    })
+
+    swiper.el.addEventListener('touchmove', e => {
+        touchEndY = e.touches[0].clientY
+    })
+
+    swiper.el.addEventListener('touchend', () => {
+        const direction = touchEndY > touchStartY ? 'prev' : 'next'
+
+        if (!isTransitioning) {
+            isTransitioning = true
+
+            if (direction === 'next') {
+                swiper.slideNext()
+            } else {
+                swiper.slidePrev()
+            }
+
+            setTimeout(() => isTransitioning = false, SLIDE_TRANSITION_DURATION)
+
+            if ((direction === 'next' && swiper.isEnd) || (direction === 'prev' && swiper.activeIndex === 0)) {
+                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 500)
+            } else {
+                fullpage_api.setAllowScrolling(false)
+            }
+        }
+    })
 }
+
+
