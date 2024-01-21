@@ -46,7 +46,7 @@ const fullPageSettings = () => {
 					fullpage_api.setAllowScrolling(false)
 					break
 
-				case 4:
+				case 3:
 					footer.classList.add('visible')
 					break
 
