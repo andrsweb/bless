@@ -1,6 +1,15 @@
 import fullpage from 'fullpage.js'
 import Swiper from 'swiper'
 
+const
+	LAST_SLOT_ANIMATION_DURATION	= 7500,
+	SLIDE_TRANSITION_DURATION		= 900
+
+let slotSwiper,
+	slotSwiperLastSlide,
+	swipedStart,
+	swipedEnd
+
 document.addEventListener('DOMContentLoaded', () => {
     'use strict'
 
@@ -23,42 +32,129 @@ const fullPageSettings = () => {
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
-            if (destination.index === 1) {
-                fullpage_api.setAllowScrolling(false)
-                header.classList.add('removed')
-            } else if (destination.index === 0) {
-                header.classList.remove('removed')
-            }
+			switch( destination.index ){
+				case 0:
+					header.classList.remove('removed')
+					break
 
-            if (destination.index === 2) {
-                fullpage_api.setAllowScrolling(false)
-            }
+				case 1:
+					fullpage_api.setAllowScrolling(false)
+					header.classList.add('removed')
+					break
 
-            if (destination.index === 3) {
-                footer.classList.add('visible')
-            } else footer.classList.remove('visible')
+				case 2:
+					fullpage_api.setAllowScrolling(false)
+					break
+
+				case 4:
+					footer.classList.add('visible')
+					break
+
+				default:
+					footer.classList.remove('visible')
+			}
         },
 
         onLeave: function (origin, destination, direction) {
             if (origin.index === 0 || origin.index === 2) {
-                const slotSwiper = document.querySelector('.swiper.slot-swiper')
-                const lastSlide = slotSwiper.querySelector('.swiper-slide:last-child')
+                slotSwiper			= document.querySelector('.swiper.slot-swiper')
+				slotSwiperLastSlide	= slotSwiper.querySelector('.swiper-slide:last-child')
 
-                if (lastSlide) {
-                    if (lastSlide.classList.contains('animated')) {
-                        lastSlide.classList.remove('animated')
-                    }
+                if (slotSwiperLastSlide) {
+                    if (slotSwiperLastSlide.classList.contains('animated')) slotSwiperLastSlide.classList.remove('animated')
 
-                    if (!lastSlide.classList.contains('closed')) {
-                        lastSlide.classList.add('closed')
-                    }
+                    if (!slotSwiperLastSlide.classList.contains('closed')) slotSwiperLastSlide.classList.add('closed')
 
                     slotSwiperAnimated = false
                 }
             }
+
             fullpage_api.setAllowScrolling(true)
         }
     })
+}
+
+const initSlotSwiper = (selector) => {
+	const swiper = new Swiper(selector, {
+		direction: 'horizontal',
+		slidesPerView: 1,
+		spaceBetween: 20,
+		speed: SLIDE_TRANSITION_DURATION,
+		allowTouchMove: false,
+
+		on: {
+			slideChange: () => {
+				const prevSlide = swiper.slides[swiper.previousIndex]
+				const lastSlide = swiper.slides[swiper.slides.length - 1]
+				const isLastSlideActive = swiper.isEnd && swiper.activeIndex === swiper.slides.length - 1
+
+				if (prevSlide) {
+					prevSlide.classList.remove('animated')
+				}
+
+				if (isLastSlideActive) {
+					lastSlide.classList.remove('closed')
+					lastSlide.classList.add('animated')
+					fullpage_api.setAllowScrolling(false)
+					setTimeout(() => {
+						fullpage_api.moveSectionDown()
+						lastSlide.classList.remove('animated')
+						lastSlide.classList.add('closed')
+					}, LAST_SLOT_ANIMATION_DURATION)
+				}
+			}
+		}
+	})
+
+	let isTransitioning = false
+
+	swiper.el.addEventListener('wheel', e => {
+		const direction = e.deltaY > 0 ? 'next' : 'prev'
+
+		if (!isTransitioning) {
+			isTransitioning = true
+
+			if (direction === 'next') {
+				swiper.slideNext()
+			} else {
+				swiper.slidePrev()
+			}
+
+			if( direction === 'prev' && swiper.activeIndex === 0 ){
+				setTimeout( () => fullpage_api.setAllowScrolling( true, direction === 'next' ? 'down' : 'up' ), SLIDE_TRANSITION_DURATION )
+			}else{
+				fullpage_api.setAllowScrolling(false)
+			}
+
+			// If this is the last slot - disable transition while animation is playing.
+			if( swiper.isEnd ) setTimeout( () => isTransitioning = false, LAST_SLOT_ANIMATION_DURATION )
+			else setTimeout( () => isTransitioning = false, SLIDE_TRANSITION_DURATION )
+		}
+	})
+
+	swiper.el.addEventListener('touchstart', e => swipedStart = e.changedTouches[0].clientY )
+	swiper.el.addEventListener('touchend', e => {
+		swipedEnd = e.changedTouches[0].clientY
+
+		const direction = swipedEnd < swipedStart ? 'next' : 'prev'
+
+		if (!isTransitioning) {
+			isTransitioning = true
+
+			// Swipe from bottom to top.
+			if( direction === 'next' ) swiper.slideNext()
+			else swiper.slidePrev()
+
+			if( direction === 'prev' && swiper.activeIndex === 0 )
+				setTimeout( () => fullpage_api.setAllowScrolling( true, direction === 'next' ? 'down' : 'up' ), SLIDE_TRANSITION_DURATION )
+			else
+				fullpage_api.setAllowScrolling(false)
+
+			// If this is the last slot - disable transition while animation is playing.
+			if( swiper.isEnd ) setTimeout( () => isTransitioning = false, LAST_SLOT_ANIMATION_DURATION )
+			else setTimeout( () => isTransitioning = false, SLIDE_TRANSITION_DURATION )
+		}
+	})
 }
 
 const initNftSwiper = (selector) => {
@@ -66,7 +162,7 @@ const initNftSwiper = (selector) => {
         direction: 'horizontal',
         slidesPerView: 1,
         spaceBetween: 20,
-        speed: 900,
+        speed: SLIDE_TRANSITION_DURATION,
     })
 
     let isTransitioning = false
@@ -83,68 +179,12 @@ const initNftSwiper = (selector) => {
                 swiper.slidePrev()
             }
 
-            setTimeout(() => isTransitioning = false, 900)
+            setTimeout(() => isTransitioning = false, SLIDE_TRANSITION_DURATION)
 
             if ((direction === 'next' && swiper.isEnd) || (direction === 'prev' && swiper.activeIndex === 0)) {
                 setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 500)
             } else {
                 fullpage_api.setAllowScrolling(false)
-            }
-        }
-    })
-}
-
-const initSlotSwiper = (selector) => {
-    const swiper = new Swiper(selector, {
-        direction: 'horizontal',
-        slidesPerView: 1,
-        spaceBetween: 20,
-        speed: 900,
-
-        on: {
-            slideChange: () => {
-                const prevSlide = swiper.slides[swiper.previousIndex]
-                const lastSlide = swiper.slides[swiper.slides.length - 1]
-                const isLastSlideActive = swiper.isEnd && swiper.activeIndex === swiper.slides.length - 1
-
-                if (prevSlide) {
-                    prevSlide.classList.remove('animated')
-                }
-
-                if (isLastSlideActive) {
-                    lastSlide.classList.remove('closed')
-                    lastSlide.classList.add('animated')
-                    fullpage_api.setAllowScrolling(false) // не отрабатывает сука
-                    setTimeout(() => fullpage_api.moveSectionDown(), 7500) 
-                }
-            }
-        }
-    })
-
-    let isTransitioning = false
-
-    swiper.el.addEventListener('wheel', e => {
-        const direction = e.deltaY > 0 ? 'next' : 'prev'
-
-        if (!isTransitioning) {
-            isTransitioning = true
-
-            if (direction === 'next') {
-                swiper.slideNext()
-            } else {
-                swiper.slidePrev()
-            }
-
-            setTimeout(() => isTransitioning = false, 900)
-
-            if ((direction === 'next' && swiper.isEnd) || (direction === 'prev' && swiper.activeIndex === 0)) {
-                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 900)
-            } else {
-                fullpage_api.setAllowScrolling(false)
-            }
-
-            if(direction === 'next' && swiper.isEnd || direction === 'prev' && swiper.isEnd) {
-                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 6000)
             }
         }
     })
