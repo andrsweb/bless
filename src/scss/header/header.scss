@@ -76,6 +76,9 @@
         &-item {
             padding: 12px 28px;
             border-radius: $bord100;
+            cursor: pointer;
+            
+           
 
             a {
                 color: $white;
@@ -84,6 +87,8 @@
                 font-style: normal;
                 font-weight: $fw-medium;
                 line-height: 24px;
+                position: relative;
+                z-index: 1;
             }
 
             &.active {
@@ -99,6 +104,20 @@
         padding: 0;
     }
 }
+
+#marker {
+    position: absolute;
+    display:none;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: $dark-bg;
+    height: 48px;
+    border-radius: $bord100;
+    transition:width 1s, left 1s;
+    pointer-events: none;
+}
+
 
 .social__link {
     display: flex;
