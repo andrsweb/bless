@@ -116,6 +116,7 @@
     border-radius: $bord100;
     transition:width 1s ease, left 1s ease, opacity 1s ease;
     pointer-events: none;
+    opacity: 0;
 }
 
 .social__link {
