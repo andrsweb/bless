@@ -33,13 +33,14 @@ const fullPageSettings = () => {
         licenseKey: '9DMW8-YL9I9-IINYH-5PGM7-DFOSK',
         fitToSection: true,
         css3: true,
-        anchors: ['firstPage', 'secondPage', '3rdPage'],
+        anchors: ['firstPage', 'secondPage', '3rdPage', 'lastPage'],
         menu: '#menu',
 
         afterLoad: function (origin, destination, direction) {
 			switch( destination.index ){
 				case 1:
 					fullpage_api.setAllowScrolling(false)
+                    footer.classList.remove('visible')
 					break
 				case 2:
 					fullpage_api.setAllowScrolling(false)
@@ -62,19 +63,6 @@ const fullPageSettings = () => {
         },
 
         onLeave: function (origin, destination, direction) {
-            if (origin.index === 0 || origin.index === 2) {
-                slotSwiper			= document.querySelector('.swiper.slot-swiper')
-				slotSwiperLastSlide	= slotSwiper.querySelector('.swiper-slide:last-child')
-
-                if (slotSwiperLastSlide) {
-                    if (slotSwiperLastSlide.classList.contains('animated')) slotSwiperLastSlide.classList.remove('animated')
-
-                    if (!slotSwiperLastSlide.classList.contains('closed')) slotSwiperLastSlide.classList.add('closed')
-
-                    slotSwiperAnimated = false
-                }
-            }
-
             fullpage_api.setAllowScrolling(true)
         }
     })

@@ -144,6 +144,10 @@
     flex-direction: column;
     transition: transform ease $tr, opacity ease $tr;
 
+    a {
+        margin-bottom: 5px;
+    }
+
     @media all and (min-width: $md) {
         display: none;
     }
