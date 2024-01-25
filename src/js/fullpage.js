@@ -113,6 +113,7 @@ const initSlotSwiper = (selector) => {
 	let isTransitioning = false
 
 	swiper.el.addEventListener('wheel', e => {
+        e.preventDefault()
         if(!swiper.el) return
 		const direction = e.deltaY > 0 ? 'next' : 'prev'
 
@@ -131,7 +132,6 @@ const initSlotSwiper = (selector) => {
 				fullpage_api.setAllowScrolling(false)
 			}
 
-			// If this is the last slot - disable transition while animation is playing.
 			if( swiper.isEnd ) setTimeout( () => isTransitioning = false, LAST_SLOT_ANIMATION_DURATION )
 			else setTimeout( () => isTransitioning = false, SLIDE_TRANSITION_DURATION )
 		}
@@ -146,7 +146,6 @@ const initSlotSwiper = (selector) => {
 		if (!isTransitioning) {
 			isTransitioning = true
 
-			// Swipe from bottom to top.
 			if( direction === 'next' ) swiper.slideNext()
 			else swiper.slidePrev()
 
@@ -155,7 +154,6 @@ const initSlotSwiper = (selector) => {
 			else
 				fullpage_api.setAllowScrolling(false)
 
-			// If this is the last slot - disable transition while animation is playing.
 			if( swiper.isEnd ) setTimeout( () => isTransitioning = false, LAST_SLOT_ANIMATION_DURATION )
 			else setTimeout( () => isTransitioning = false, SLIDE_TRANSITION_DURATION )
 		}
@@ -179,6 +177,7 @@ const initNftSwiper = (selector) => {
     let touchEndY = 0
 
     swiper.el.addEventListener('wheel', e => {
+        e.preventDefault()
         const direction = e.deltaY > 0 ? 'next' : 'prev'
 
         if (!isTransitioning) {
@@ -193,7 +192,7 @@ const initNftSwiper = (selector) => {
             setTimeout(() => isTransitioning = false, SLIDE_TRANSITION_DURATION)
 
             if ((direction === 'next' && swiper.isEnd) || (direction === 'prev' && swiper.activeIndex === 0)) {
-                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 500)
+                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 900)
             } else {
                 fullpage_api.setAllowScrolling(false)
             }
@@ -223,7 +222,7 @@ const initNftSwiper = (selector) => {
             setTimeout(() => isTransitioning = false, SLIDE_TRANSITION_DURATION)
 
             if ((direction === 'next' && swiper.isEnd) || (direction === 'prev' && swiper.activeIndex === 0)) {
-                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 500)
+                setTimeout(() => fullpage_api.setAllowScrolling(true, direction === 'next' ? 'down' : 'up'), 900)
             } else {
                 fullpage_api.setAllowScrolling(false)
             }
