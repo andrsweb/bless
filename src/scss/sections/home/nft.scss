@@ -32,12 +32,12 @@
         }
 
         &__img {
-            width: 390px;
-            height: 364px;
+            width: 327px;
+            height: 340px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: auto;
+            margin-top: 48px;
             position: relative;
 
             @media all and (min-width: $lg) {
