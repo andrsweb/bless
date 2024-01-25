@@ -14,6 +14,9 @@ export default {
 	},
 
 	imagemin: {
-		verbose: true
+        verbose: true,
+        quality: {
+            webp: 100
+        },
 	}
 }

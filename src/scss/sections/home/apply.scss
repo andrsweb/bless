@@ -53,6 +53,7 @@
 
         @media all and (min-width: $lg) {
             flex-direction: row;
+            padding: 0 100px;
         }
     }
 
@@ -79,20 +80,35 @@
     }
 
     &__img {
-        width: 331px;
-        height: 406px;
+        width: 89.9vw;
+        height: 59.5vh;
         position: relative;
         z-index: 1;
+
+        @media all and (min-width: 576px) {
+            width: 49.5vw;
+            height: 59.2vh;
+        }
+
+        @media all and (min-width: $md) {
+            width: 63.6vw;
+            height: 59.5vh;
+        }
+
+        @media all and (min-width: $xl) {
+            width: 35.42vw;
+            height: 59.2vh;
+        }
+
+        @media all and (min-width: 1500px) {
+            width: 25.42vw;
+            height: 52.8vh;
+        }
 
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-        }
-
-        @media all and (min-width: $xxl) {
-            width: 488px;
-            height: 464px;      
+            object-fit: contain;
         }
     }
 

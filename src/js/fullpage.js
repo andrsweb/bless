@@ -33,35 +33,36 @@ const fullPageSettings = () => {
         css3: true,
         anchors: ['firstPage', 'secondPage', '3rdPage', 'lastPage'],
         menu: '#menu',
+        fitToSection: false,
 
         afterLoad: function (origin, destination, direction) {
-			switch( destination.index ){
-				case 1:
-					fullpage_api.setAllowScrolling(false)
-                    footer.classList.remove('visible')
-					break
-				case 2:
-					fullpage_api.setAllowScrolling(false)
-					break
+            if(destination.index === 1) {
+                fullpage_api.setAllowScrolling(false)
+                footer.classList.remove('visible')
+                header.classList.add('removed')
+            } else {
+                header.classList.remove('removed')
+            }
 
-				case 3:
-					footer.classList.add('visible')
-					break
+            if(destination.index === 2) {
+                fullpage_api.setAllowScrolling(false)
+            }
 
-				default:
-					footer.classList.remove('visible')
-			}
+            if(destination.index === 4) {
+                footer.classList.add('visible')
+            }
 
             if(footer.classList.contains('visible')) {
                 mobileLinks.classList.add('hidden')
             } else mobileLinks.classList.remove('hidden')
-
-            if(destination.index === 1) header.classList.add('removed')
-            else header.classList.remove('removed')
         },
 
         onLeave: function (origin, destination, direction) {
             fullpage_api.setAllowScrolling(true)
+
+            if(destination.index === 3) {
+                footer.classList.add('visible')
+            } else footer.classList.remove('visible')
         }
     })
 }

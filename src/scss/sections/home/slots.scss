@@ -22,6 +22,21 @@
     height: 100%;
     overflow: hidden;
 
+    .noise {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200vw;
+        height: 100vh;
+        mix-blend-mode: overlay;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
     &::before {
         content: "";
         position: absolute;
@@ -40,46 +55,51 @@
         margin-bottom: 40px;
         width: 100%;
         max-width: 350px;
+
+        &__wrapper {
+            position: absolute;
+            left: 50%;
+            top: 2vw;
+            transform: translateX(-50%);
+        }
     }
 
     &__slides {
         display: flex;
         justify-content: center;
-        position: relative;
     }
 
     &__img {
+        display: flex;
+        align-items: flex-end;
         width: 100%;
-        height: auto;
-        overflow-y: hidden;
+        height: 100%;
         position: relative;
 
-        @media all and (min-width: $sm) {
-            width: 70%;
-        }
+       &.new__img {
+		position: absolute;
+		left: 0;
+		top: 0;
+       }
 
-        @media all and (min-width: $lg) {
-            width: 40%;
-        }
+        picture {
+            width: 100vw;
+            height: 100vh;
 
-        .new-slot {
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 1;
-        }
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
         }
 
         &_wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
             width: 100%;
+            height: 100vh;
+            position: relative;
         }
     }
 
@@ -97,26 +117,23 @@
 
                 @keyframes forSlot {
                     0% {
-                        scale: 1;
-                        transform: translateY(0);
-                    }
+						scale: 1;
+					}
 
-                    90% {
-                        opacity: 1;
-                    }
+					90% {
+						opacity: 1;
+					}
 
-                    100% {
-                        opacity: 0;
-                        scale: 1.8;
-                        transform: translateY(15%);
-                    }
+					100% {
+						opacity: 0;
+						scale: 2;
+					}
                 }
 
                 @media all and (min-width: $sm) {
                     @keyframes forSlot {
                         0% {
                             scale: 1;
-                            transform: translateY(0);
                         }
     
                         90% {
@@ -125,8 +142,7 @@
     
                         100% {
                             opacity: 0;
-                            scale: 2.5;
-                            transform: translateY(15%);
+                            scale: 3;
                         }
                     }    
                 }
@@ -135,7 +151,6 @@
                     @keyframes forSlot {
                         0% {
                             scale: 1;
-                            transform: translateY(0);
                         }
     
                         90% {
@@ -145,7 +160,6 @@
                         100% {
                             opacity: 0;
                             scale: 3.5;
-                            transform: translateY(15%);
                         }
                     }    
                 }
@@ -154,7 +168,6 @@
                     @keyframes forSlot {
                         0% {
                             scale: 1;
-                            transform: translateY(0);
                         }
     
                         90% {
@@ -163,8 +176,7 @@
     
                         100% {
                             opacity: 0;
-                            scale: 5.8;
-                            transform: translateY(15%);
+                            scale: 4;
                         }
                     }    
                 }
@@ -178,9 +190,6 @@
                                 opacity: 1;
                             }
 
-                            80% {
-                                opacity: 0;
-                            }
 
                             100% {
                                 opacity: 0;
@@ -189,21 +198,21 @@
                     }
 
                     .new-slot {
-                        animation: newSlot forwards 4s linear;
+                        animation: newSlot forwards 8s linear;
 
                         @keyframes newSlot {
-                            0% {
-                                opacity: 0;
-                            }
+							0% {
+								opacity: 0;
+							}
 
-                            80% {
-                                opacity: 1;
-                            }
+							50% {
+								opacity: 1;
+							}
 
-                            100% {
-                                opacity: 1;
-                            }
-                        }
+							100% {
+								opacity: 1;
+							}
+						}
                     }
                 }
             }
@@ -214,35 +223,29 @@
                 @keyframes forSlotClose {
                     0% {
                         opacity: 0;
-                        scale: 6;
-                        transform: translateY(15%);
+                        scale: 4;
                     }
 
-                    75% {
+                    50% {
                         opacity: 1;
                     }
 
                     100% {
                         scale: 1;
-                        transform: translateY(0);
                     }
                 }
                 
                 .new-slot {
-                    animation: newSlotClose forwards 4s linear;
+                    animation: newSlotClose forwards 8s ease;
 
                     @keyframes newSlotClose {
-                        0% {
-                            opacity: 1;
-                        }
+						0% {
+							opacity: 1;
+						}
 
-                        80% {
-                            opacity: 1;
-                        }
-
-                        100% {
-                            opacity: 0;
-                        }
+						100% {
+							opacity: 0;
+						}
                     }
                 }
 
@@ -294,55 +297,7 @@
 
     .slot {
        display: flex;
-       align-items: flex-end;
+        align-items: flex-end;
         position: relative;
-
-        .slot__shadow1 {
-            width: 500px;
-            height: 500px;
-            position: absolute;
-            left: 30%;
-            top: 0;            
-            z-index: -1;
-
-            @media all and (min-width: $md) {
-                left: 30%;
-                top: 0;  
-                width: 1000px;
-                height: 1000px;
-            }
-
-            @media all and (min-width: $lg) {
-                transform: translate(-50%,-50%);
-                left: 50%;
-                top: 50%;  
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        .slot__shadow2 {
-            width: 500px;
-            height: 500px;
-            position: absolute;
-            left: 80%;
-            top: 10%;
-            z-index: -1;
-
-            @media all and (min-width: $md) {
-                left: -20%;
-                top: 0;  
-                width: 1500px;
-                height: 800px;
-            }
-
-            @media all and (min-width: $lg) {
-                transform: translate(-50%,-50%);
-                left: 50%;
-                top: 50%;  
-                width: 100%;
-                height: auto;
-            }
-        }
     }
 }
